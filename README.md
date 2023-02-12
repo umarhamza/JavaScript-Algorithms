@@ -216,6 +216,75 @@ const isPrime = (n: number): boolean => {
 // Big-O = O(sqrt(n))
 ```
 
+## Power of Two
+
+**Problem:** Given a positive number `n`, determine if the number is a power of two or not. A number is a power of two if there is a number `x` such that `n === 2x`.
+
+- isPowerOfTwo(1) = true
+- isPowerOfTwo(2) = true
+- isPowerOfTwo(5) = false
+
+### Sudo Code (Power of Two)
+
+n = 8
+8/2 = 4 (remainder 0)
+4/2 = 2 (remainder 0)
+2/2 = 1 (remainder 0)
+If remainder is not 0 in any step, `n` is not a power of two.
+If the remainder is 0 and `n` comes down to 1 eventually, `n` is a power of two.
+
+### Code (Power of two)
+
+```typescript
+const powerOfTwo = (n: number): boolean => {
+  if (n < 1) return false;
+  while (n > 1) {
+    if (n % 2 !== 0) {
+      return false;
+    }
+    n = n / 2;
+  }
+  return true;
+};
+
+console.log(powerOfTwo(1)); // true
+console.log(powerOfTwo(2)); // true
+console.log(powerOfTwo(5)); // false
+
+// Big-O = O(logn)
+```
+
+## Power of Two (Bitwise)
+
+JavaScript stores numbers as 64 bits floating point numbers, but all bitwise operations are performed on 32 bits binary numbers.
+
+Before a bitwise operation is performed, JavaScript converts numbers to 32 bits signed integers.
+
+After the bitwise operation is performed, the result is converted back to 64 bits JavaScript numbers.
+
+[References](https://www.w3schools.com/js/js_bitwise.asp)
+
+### Table
+
+- 1 & 0 = 0
+- 2 & 1 = 0
+- 5 & 4 = 4
+
+*There is no loop so the time complexity is constant.*
+
+```typescript
+const powerOfTwo = (n: number): boolean => {
+  if (n < 1) return false;
+  return (n & (n-1)) === 0;
+};
+
+console.log(powerOfTwo(1)); // true
+console.log(powerOfTwo(2)); // true
+console.log(powerOfTwo(5)); // false
+
+// Big-O = O(1)
+```
+
 ## Next Steps
 
 ### Solve more problems
