@@ -285,6 +285,54 @@ console.log(powerOfTwo(5)); // false
 // Big-O = O(1)
 ```
 
+## Recursion
+
+### What?
+
+Recursion is the process by which a function calls itself. It is a problem solving technique where the solution depends on solutions to smaller instances of the same problem.
+
+### Why?
+
+A great technique to simplify your solutions. If you find yourself breaking down your problems into smaller versions of the same problem, then you should likely use recursion.
+
+### A few points
+
+Every recursive solution needs to have a base case - which is a condition to terminate the recursion.
+
+Recursion might simplify solving a problem but it does not always translate to a faster solution. A recursive solution maybe far worse compared to an iterative solution.
+
+## Recursive Fibonacci
+
+The Fibonacci sequence is perfect for recursion. The formula is Fn = Fn-1 + Fn-2.
+
+This is what the recursive solution looks like:
+
+```javascript
+const recursiveFibonacci = (n) => {
+  if (n < 2) return n;
+  return recursiveFibonacci(n - 1) + recursiveFibonacci(n - 2);
+};
+
+console.log(recursiveFibonacci(0));
+console.log(recursiveFibonacci(1));
+console.log(recursiveFibonacci(6));
+
+// Big-O = O(2^n)
+
+```
+
+And this is what the JavaScript call stack looks like:
+
+- fib(2) = fib(1) + fib(0) = 1 + 0 = 1
+- fib(3) = fib(2) + fib(1) = 1 + 1 = 2
+- fib(4) = fib(3) + fib(2) = 2 + 1 = 3
+- fib(5) = fib(4) + fib(3) = 3 + 2 = 5
+- fib(6) = fib(5) + fib(4) = 5 + 3 = 8
+
+1. First we calculate `fib(2)` which is equal to `fib(1) + fib(0)`. Due to our base case `fib(1) + fib(0)` becomes `n + n` or `1 + 0` which is equal to `1` Therefore `fib(2)` returns `1`.
+2. Then we have `fib(3)` which is equal to `fib(2) + fib(1)`. We already know `fib(2)` returns `1` and `fib(1)` also returns `n` or `1` - hence `fib(3)` returns `1 + 1 = 2`.
+3. Next we have `fib(4)` which is equal to `fib(3) + fib(2)`. Looking at the previous examples in the stack - we know it equates to `2 + 1 = 3`
+
 ## Next Steps
 
 ### Solve more problems
