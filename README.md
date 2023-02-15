@@ -331,7 +331,42 @@ And this is what the JavaScript call stack looks like:
 
 1. First we calculate `fib(2)` which is equal to `fib(1) + fib(0)`. Due to our base case `fib(1) + fib(0)` becomes `n + n` or `1 + 0` which is equal to `1` Therefore `fib(2)` returns `1`.
 2. Then we have `fib(3)` which is equal to `fib(2) + fib(1)`. We already know `fib(2)` returns `1` and `fib(1)` also returns `n` or `1` - hence `fib(3)` returns `1 + 1 = 2`.
-3. Next we have `fib(4)` which is equal to `fib(3) + fib(2)`. Looking at the previous examples in the stack - we know it equates to `2 + 1 = 3`
+3. Next we have `fib(4)` which is equal to `fib(3) + fib(2)`. Looking at the previous examples in the stack - we know it equates to `2 + 1 = 3`.
+4. The same logic applies to `fib(5)` which equals to `5`.
+5. Lastly we have `fib(6)` which is the final stack. However, this will add all the previous steps back to the stack again and return the same results until we get `3 + 5 = 8`.
+
+## Recursive Factorial
+
+The factorial algorithm is also another problem that is great for recursion.
+
+When using a recursive solution, first break down the problem into smaller versions of the same problem and then idetify the base case for recursion.
+
+### Rethinking Factorial
+
+In order to get an understanding of how we will approach the recursive Factorial problem, we must rethink the way we've previously implemented the Factorial problem. In the previous Factorial problem - we loop up to `n` where `index` begins at `2`. In the new approach, `index` is equal to `n`, then we subtract `1` from `index` until zero.
+
+``` javascript
+const factorial = (n) => {
+  let result = 1;
+  for (let i = n; i !== 0; i--) {
+    result = result * i;
+  }
+  return result;
+};
+```
+
+### Recursion Solution
+
+Keeping this in mind, we will follow a similar principle in the recursive Factorial algorithm by subtracting `1` from `n` (`n - 1`). Then we simply multiply `n` with `n - 1`. This is what the code looks like:
+
+``` javascript
+const fac = (n) => {
+  if (n < 2) return n;
+  return n * fac(n - 1);
+};
+console.log(fac(5));
+// Big-O = O(n)
+```
 
 ## Next Steps
 
