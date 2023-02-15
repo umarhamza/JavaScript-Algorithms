@@ -368,6 +368,53 @@ console.log(fac(5));
 // Big-O = O(n)
 ```
 
+## Linear Search Algorithm
+
+Linear Search is an algorithm that searches sequentially starting from one end of the array and goes through each element in the list until it finds the target element.
+
+### Problem (Linear Search)
+
+Given an array of `n` elements and a target element `t`, find the index or `t` in the array. Return -1 if the target element is not found.
+
+### Solution (Linear Search)
+
+The solution is simple:
+
+1. Loop through the array where `index` begins at zero.
+2. Check if each element in the array matches the target.
+3. If they match, return `index`.
+4. If no match is found. Return `-1` outside the loop by default.
+
+### Code (Linear Search)
+
+```javascript
+function linearSearch(n, t) {
+ for (let i = 0; i < n.length; i++) {
+    if (t === n[i]) return i;
+ }
+ return -1;
+}
+console.log(linearSearch([-5, 2, 10, 4, 6], 10)); // 2
+// Big-O = O(n)
+```
+
+### Recursive Linear Search
+
+Looking at the Linear Search algorithm, its really obvious that it can be done recursively. Here is an example below:
+
+```javascript
+function lin(a, t, i = 0) {
+  if (a[i] === t) return i;
+  if (i >= a.length) return -1;
+  return lin(a, t, i + 1);
+}
+console.log(lin([-5, 2, 10, 4, 6], 4));
+```
+
+1. We set `i` to zero inside the arguments.
+2. Instead of using a loop, we are iteratively increasing `i` by `1` each time we call the `lin()` function.
+3. Then we check if the array element matches the target and return `i` if they match.
+
 ## Next Steps
 
 ### Solve more problems
