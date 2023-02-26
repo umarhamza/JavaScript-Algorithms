@@ -415,6 +415,10 @@ console.log(lin([-5, 2, 10, 4, 6], 4));
 2. Instead of using a loop, we are iteratively increasing `i` by `1` each time we call the `lin()` function.
 3. Then we check if the array element matches the target and return `i` if they match.
 
+## Binary Search
+
+Binary Search is a searching algorithm used to locate an item in a **sorted** array by repeatedly dividing the search interval in half. The Binary Search will only work with a **sorted** array.
+
 ## Next Steps
 
 ### Solve more problems
