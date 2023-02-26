@@ -459,6 +459,72 @@ console.log(binarySearch([-5, 2, 4, 6, 10], 20)); // -1
 
 ### Solution (Binary Search)
 
+First we set the right and left index. This is so we have a "base case" to stop running the while loop. If the `leftIndex` is more than the `rightIndex`, it means the target cannot be found.
+
+This is happen when the `target` is either smaller than the middle element so it falls on the left of the array or when it is larger than the middle element and it falls on the right half of the array.
+
+If `target` is on the right side of the array, the `if` statement will return false and `leftIndex` will be incremented. If `target` is on the left side, the `if` statement will return true and `rightIndex` will be decremented.
+
+Either way - on the last evaluation of the `while` loop, `leftIndex` will be more than `rightIndex` which will stop the loop running and our algorithm will return `-1` (element not found).
+
+#### Approach
+
+- We run the algorithm and set target to `1`.
+- The `leftIndex` is set to `0`.
+- The `rightIndex` is set to `4` - the last index in the array (`arr.length - 1`).
+- We calculate the following:
+  - `middleIndex` as `leftIndex + rightIndex = X` which is `0 + 4 = 4`.
+  - `Math.floor(X) / 2 = Y` which is `4 / 2 = 2` (rounded to the smallest number).
+  - Therefore `2` is the `middleIndex`.
+- Then we check if the `target` is equal to the middle element (`arr[middleIndex]`). If it is we return the `middleIndex`.
+- Now we can evaluate if the `target` falls on the left or right side of the array.
+- If it falls on the left side, we set the `rightIndex` to `1` (`middleIndex - 1 = 1` which is `2 - 1 = 1`).
+- Now the left half of the array begins at index `0` to index `1` = `[-5, 2]`.
+- At this point, `leftIndex` is still `0`. So the while loop still continues as `leftIndex` is less than `rightIndex` - `0 < 1`.
+- The middleIndex becomes `0` as `0 + 1 / 2 = 0` (rounded to the smallest number).
+- Then we check if `target` (`1`) is less than the middle element (`-5`) which is `false`.
+- Now we set the `leftIndex` to `1` (`middleIndex + 1 = 1` or `0 + 1 = 1`).
+- `leftIndex` and `rightIndex` are both `1` so the while loop continues as they are equal.
+- `middleIndex` becomes `1` hence the middle element is `2`.
+- `target` is less than the middle element, so we set the `rightIndex` to `0` (`middleIndex - 1` or `1 - 1 = 0`).
+- At this point `leftIndex` is `1` and `rightIndex` is `0`. The while loop evaluates if `leftIndex <= rightIndex` (`1 < 0`), this is false so the loop does not continue.
+- Finally, we return `-1`.
+
+## Recursive Binary Search
+
+### Code (Recursive Binary Search)
+
+```javascript
+const recursiveBinarySearch = (
+  arr,
+  target,
+  leftIndex = 0,
+  rightIndex = arr.length - 1
+) => {
+  if (arr.length < 0) return -1;
+
+  const middleIndex = Math.floor((leftIndex + rightIndex) / 2);
+
+  if (target === arr[middleIndex]) return middleIndex;
+
+  if (leftIndex >= rightIndex) return -1;
+
+  if (target < arr[middleIndex]) {
+    rightIndex = middleIndex - 1;
+    return recursiveBinarySearch(arr, target, leftIndex, rightIndex);
+  } else {
+    leftIndex = middleIndex + 1;
+    return recursiveBinarySearch(arr, target, leftIndex, rightIndex);
+  }
+};
+
+console.log(recursiveBinarySearch([-5, 2, 4, 6, 10], 10)); // 4
+console.log(recursiveBinarySearch([-5, 2, 4, 6, 10], 6)); // 3
+console.log(recursiveBinarySearch([-5, 2, 4, 6, 10], 20)); // -1
+
+// Big-O = O(logn)
+```
+
 ## Next Steps
 
 ### Solve more problems
