@@ -28,7 +28,7 @@ An object is a collection of key value pairs and always have a constant time com
 - Insert - O(1)
 - Remove - O(1)
 - Access - O(1)
-- Search  - O(n)
+- Search - O(n)
   - Object.keys()
   - Object.values()
   - Object.entries()
@@ -105,13 +105,13 @@ fib[i] = fib[i - 1] + fib[i - 2]
 
 #### Code (Fibonacci)
 
-``` typescript
+```typescript
 const fibonacci = (n: number): number[] => {
-    const fib = [0, 1]
-    for (let i = 2; i < n; i++) {
-        fib[i] = fib[i - 1] + fib[i - 2]
-    }
-    return fib
+  const fib = [0, 1];
+  for (let i = 2; i < n; i++) {
+    fib[i] = fib[i - 1] + fib[i - 2];
+  }
+  return fib;
 };
 
 console.log(fibonacci(2)); // [0, 1]
@@ -131,7 +131,7 @@ The Factorial of a non-negative number `n` denoted n!, is the product of all pos
 
 ### Problem (Factorial)
 
-Given an integer `n`, find the  that number.
+Given an integer `n`, find the that number.
 
 ### Solution (Factorial)
 
@@ -141,13 +141,13 @@ Given an integer `n`, find the  that number.
 
 #### Code (Factorial)
 
-``` typescript
+```typescript
 const factorial = (n: number): number => {
-    let result = 1;
-    for (let i = 2; i <= n; i++) {
-        result *= i
-    }
-    return result
+  let result = 1;
+  for (let i = 2; i <= n; i++) {
+    result *= i;
+  }
+  return result;
 };
 
 console.log(factorial(0)); // 1
@@ -181,7 +181,7 @@ Given a natural number `n`, determine if the number is prime of not.
 
 `n` < 2 return false
 loop `index` of 2 up to `n - 1`
-    if `n` % `index` is equal to 0 return false
+if `n` % `index` is equal to 0 return false
 return true
 
 ### Code (Prime Number)
@@ -270,12 +270,12 @@ After the bitwise operation is performed, the result is converted back to 64 bit
 - 2 & 1 = 0
 - 5 & 4 = 4
 
-*There is no loop so the time complexity is constant.*
+_There is no loop so the time complexity is constant._
 
 ```typescript
 const powerOfTwo = (n: number): boolean => {
   if (n < 1) return false;
-  return (n & (n-1)) === 0;
+  return (n & (n - 1)) === 0;
 };
 
 console.log(powerOfTwo(1)); // true
@@ -318,7 +318,6 @@ console.log(recursiveFibonacci(1));
 console.log(recursiveFibonacci(6));
 
 // Big-O = O(2^n)
-
 ```
 
 And this is what the JavaScript call stack looks like:
@@ -345,7 +344,7 @@ When using a recursive solution, first break down the problem into smaller versi
 
 In order to get an understanding of how we will approach the recursive Factorial problem, we must rethink the way we've previously implemented the Factorial problem. In the previous Factorial problem - we loop up to `n` where `index` begins at `2`. In the new approach, `index` is equal to `n`, then we subtract `1` from `index` until zero.
 
-``` javascript
+```javascript
 const factorial = (n) => {
   let result = 1;
   for (let i = n; i !== 0; i--) {
@@ -359,7 +358,7 @@ const factorial = (n) => {
 
 Keeping this in mind, we will follow a similar principle in the recursive Factorial algorithm by subtracting `1` from `n` (`n - 1`). Then we simply multiply `n` with `n - 1`. This is what the code looks like:
 
-``` javascript
+```javascript
 const fac = (n) => {
   if (n < 2) return n;
   return n * fac(n - 1);
@@ -389,10 +388,10 @@ The solution is simple:
 
 ```javascript
 function linearSearch(n, t) {
- for (let i = 0; i < n.length; i++) {
+  for (let i = 0; i < n.length; i++) {
     if (t === n[i]) return i;
- }
- return -1;
+  }
+  return -1;
 }
 console.log(linearSearch([-5, 2, 10, 4, 6], 10)); // 2
 // Big-O = O(n)
@@ -417,7 +416,48 @@ console.log(lin([-5, 2, 10, 4, 6], 4));
 
 ## Binary Search
 
-Binary Search is a searching algorithm used to locate an item in a **sorted** array by repeatedly dividing the search interval in half. The Binary Search will only work with a **sorted** array.
+Binary Search is a searching algorithm used to locate an item in a **sorted** array by repeatedly dividing the search interval in half. It returns the `index` of the `target` in a _sorted_ array.
+
+The Binary Search will only work with a **sorted** array. If you do not have a sorted array to begin with, you can use Linear Search or sort the array first and then apply Binary Search.
+
+### Problem (Binary Search)
+
+Given a _sorted_ array of `n` elements and a target element (`t`), find the index of `t` in the array. Return `-1` if the target is not found.
+
+### Pseudo Code (Binary Search)
+
+- If the array is empty, return `-1` as the element cannot be found.
+- If the array has elements, find the middle element in the array. If the target is equal to the middle element, return the middle element index.
+- If the target is less than the middle element, binary search the left half of the array.
+- If the target is greater than the middle element, binary search the right half of the array.
+
+### Code (Binary Search)
+
+```javascript
+const binarySearch = (arr, target) => {
+  let leftIndex = 0;
+  let rightIndex = arr.length - 1;
+
+  while (leftIndex <= rightIndex) {
+    let middleIndex = Math.floor((leftIndex + rightIndex) / 2);
+    if (target === arr[middleIndex]) {
+      return middleIndex;
+    }
+    if (target < arr[middleIndex]) {
+      rightIndex = middleIndex - 1;
+    } else {
+      leftIndex = middleIndex + 1;
+    }
+  }
+  return -1;
+};
+console.log(binarySearch([-5, 2, 4, 6, 10], 10)); // 4
+console.log(binarySearch([-5, 2, 4, 6, 10], 6)); // 3
+console.log(binarySearch([-5, 2, 4, 6, 10], 20)); // -1
+// Big-O = O(logn)
+```
+
+### Solution (Binary Search)
 
 ## Next Steps
 
